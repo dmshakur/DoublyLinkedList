@@ -1,6 +1,5 @@
 #ifndef _DOUBLY_LINKED_LIST_H_
 #define _DOUBLY_LINKED_LIST_H_
-// #include "Doubly_Linked_List.cpp"
 #include <vector>
 
 using namespace std;
@@ -17,7 +16,7 @@ public:
     unsigned int get_length(){ return length; }
     void display();
     void insert_data(int pos, auto data);
-    void delete_data(int pos, auto data);
+    void remove_data(int pos);
 };
 
 #endif
