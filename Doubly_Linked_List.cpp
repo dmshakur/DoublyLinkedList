@@ -1,75 +1,108 @@
 #include <iostream>
-#include "Doubly_Linked_List.cpp"
-#include "Node.cpp"
+#include "Doubly_Linked_List.h"
 
 using namespace std;
 
 Doubly_Linked_List::Doubly_Linked_List() 
-    : length(1), linked_list_data(linked_list_data.insert(linked_list_data.begin(), Node()));{
-}
-
-Doubly_Linked_List::Doubly_Linked_List(auto data) // Does this (auto data) need to be a pointer or a reference?
-    : {
-    auto temp [data.size()];
-
-    if (data.size() > 1) {
-        for (size_t i = 0; i < data.size(); ++i) {
-            if (i == 0)
-                temp.push_back(Node(data[i]));
-            else {
-                temp[i - 1].change_next(temp[*i]);
-                temp.push_back(Node(data[i], temp[i - 1]));
-            }
-        }
-    } else
-        temp.push_back(Node(data));
-
+    : length{1}
+{
+    Node *temp = new Node [1];
+    *(temp + 0) = new Node;
     linked_list_data = temp;
-    del [] temp;
+    delete temp;
 }
 
-void display() {
+Doubly_Linked_List::Doubly_Linked_List(int data)
+    : length{1}
+{
+        Node *temp = new Node [1];
+        *(temp + 0) = {Node(data)};
+        linked_list_data = temp;
+        delete temp;
+}
+
+Doubly_Linked_List::Doubly_Linked_List(int [] data) // Does this (int data) need to be a pointer or a reference?
+{
+    Node *temp = new Node [end(data) - begin(data)];
+
+    for (size_t i = 0; i < (end(data) - begin(data)); ++i) {
+        if (i == 0)
+            *temp.push_back(Node(data[i]), nullptr, &temp[i + 1]);
+        else if (i == (end(data) - begin(data)) - 1)
+            *temp.push_back(Node(data[i], &temp[i - 1]), nullptr);
+        else if (i > 0 && i < (end(data) - begin(data)) - 1)
+            *temp.push_back(Node(data[i], &temp[i - 1], &temp[i + 1]));
+    }
+
+    length = end(data) - begin(data);
+    linked_list_data = temp;
+    delete temp;
+}
+
+void Doubly_Linked_List::display()
+{
     cout << "[- " << endl;
     for (Node node : linked_list_data)
         cout << " [ " << node << " ] " << endl;
     cout << " -]" << endl;
 }
 
-void insert_data(int pos, auto data) {
-    Node temp [linked_list_data.size() + 1];
+void Doubly_Linked_List::insert_data(int pos, int data)
+{
+    if (pos >= *length || pos < 0) {
+        cout << "Invalid position argument given\0";
+        if (pos >= *length)
+            cout << "Position of: " << pos << " too high\0";
+        else if (pos < 0)
+            cout << "Position of: " << pos << " too low\0";
+        return;
+    }
 
-    for (size_t i = 0; i < temp.size(); i++) {
+    Node *temp = new Node [length + 1];
+
+    for (int i = 0; i < length + 1; i++) {
         if (i == pos) {
-            temp.push_back(Node(data, temp[*i]));
-            temp[i - 1].change_next(temp[*i]);
-            if (i < data.size()) {
-                temp[i].change_next(linked_list_data[*i]);
-                temp.push_back(linked_list_data[i]);
-                temp[i + 1].change_prev(temp[*i]);
+            *temp.push_back(Node(data));
+            
+            if (pos > 0)
+                *(temp + i).change_prev(linked_list_data + (i - 1)]);
+            if (pos < *length - 1)
+                *(temp + i).change_next(linked_list_data + (i + 1)]);
             }
         }
         else
-            temp.push_back(linked_list_data[i]);
+            temp.push_back(*(linked_list_data + i));
     }
 
+    length++
     linked_list_data = temp;
-    del [] temp;
+    delete temp;
 }
 
-void remove_data(int pos) {
-    Node temp [linked_list_data.size() - 1];
-
-    for (size_t i = 0; i < temp.size(); ++i) {
-        if (i != pos) {
-            temp.push_back(linked_list_data[i]);
-
-            if (i > 0 && i == pos + 1)
-                temp[i - 2].change_next(temp[*i]);
-            else
-                temp[i - 1].change_next(temp[*i]);
-        }
+void Doubly_Linked_List::remove_data(int pos)
+{
+    if (pos >= length || pos < 0) {
+        cout << "Invalid position argument given\0";
+        if (pos >= *length)
+            cout << "Position of: " << pos << " too high";
+        else if (pos < 0)
+            cout << "Position of: " << pos << " too low";
+        return;
     }
 
+    Node *temp = new Node [length - 1];
+
+    for (int i = 0; i < length - 1; ++i) {
+        if (i != pos) {
+            *temp.push_back(*(linked_list_data + i));
+
+            if (i == pos + 1) {
+                *temp[i - 1].change_next(temp + i);
+                *temp[i].change_prev(temp + (i - 1));
+            }
+        }
+    }
+    length--;
     linked_list_data = temp;
-    del [] temp;
+    delete temp;
 }

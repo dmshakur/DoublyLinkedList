@@ -8,10 +8,6 @@ Node::Node()
 }
 
 Node::Node(auto data_init)
-    : data(data_init) {
-}
-
-Node::Node(auto data_init)
     : data(data_init){
 }
 Node::Node(auto data_init, auto *prev_ptr_init)
