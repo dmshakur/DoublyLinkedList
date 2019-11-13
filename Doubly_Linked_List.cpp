@@ -1,7 +1,14 @@
 #include <iostream>
 #include "Doubly_Linked_List.h"
 
-using namespace std;
+// using namespace std;
+
+// std::ostream& operator<<(std::ostream& os, const Doubly_Linked_List& dll)
+// {
+//     for (unsigned int i = 0; i < dll.length; i++)
+//         os << dll.*linked_list_data[i];
+//     return os;
+// }
 
 Doubly_Linked_List::Doubly_Linked_List() 
     : length{1}
@@ -17,41 +24,40 @@ Doubly_Linked_List::Doubly_Linked_List(int data)
         linked_list_data = temp;
 }
 
-Doubly_Linked_List::Doubly_Linked_List(int data []) // Does this (int data) need to be a pointer or a reference?
+Doubly_Linked_List::Doubly_Linked_List(int data [], int sz)
 {
-    Node temp [end(data) - begin(data)];
+    Node temp [sz] = {{}};
 
-    for (size_t i = 0; i < (end(data) - begin(data)); ++i) {
-        if (i == 0)
-            *temp.push_back(Node(data[i]), nullptr, &temp[i + 1]);
+    for (int i = 0; i < sz; ++i)
+    {
+        temp[i].change_data(data[i]);
 
-        else if (i == (end(data) - begin(data)) - 1)
-            *temp.push_back(Node(data[i], &temp[i - 1]), nullptr);
-
-        else if (i > 0 && i < (end(data) - begin(data)) - 1)
-            *temp.push_back(Node(data[i], &temp[i - 1], &temp[i + 1]));
+        if (i > 0)
+            temp[i].change_prev(&temp[i - 1]);
+        if (i < sz - 1)
+            temp[i].change_next(&temp[i + 1]);
     }
 
-    length = end(data) - begin(data);
+    length = sz;
     linked_list_data = temp;
 }
 
-// void Doubly_Linked_List::display()
-// {
-//     cout << "[- " << endl;
-//     for (Node node : linked_list_data)
-//         cout << " [ " << node << " ] " << endl;
-//     cout << " -]" << endl;
-// }
+void Doubly_Linked_List::display()
+{
+    std::cout << "Doubly Linked List Length Of: " << length << std::endl << "[- \0" << std::endl;
+    for (unsigned int i = 0; i < length; i++)
+        std::cout << " [" << *(linked_list_data + i) << "],\0" << std::endl;
+    std::cout << " -]\0" << std::endl;
+}
 
 // void Doubly_Linked_List::insert_data(int pos, int data)
 // {
 //     if (pos >= *length || pos < 0) {
-//         cout << "Invalid position argument given\0";
+//         std::cout << "Invalid position argument given\0";
 //         if (pos >= *length)
-//             cout << "Position of: " << pos << " too high\0";
+//             std::cout << "Position of: " << pos << " too high\0";
 //         else if (pos < 0)
-//             cout << "Position of: " << pos << " too low\0";
+//             std::cout << "Position of: " << pos << " too low\0";
 //         return;
 //     }
 
@@ -79,11 +85,11 @@ Doubly_Linked_List::Doubly_Linked_List(int data []) // Does this (int data) need
 // void Doubly_Linked_List::remove_data(int pos)
 // {
 //     if (pos >= length || pos < 0) {
-//         cout << "Invalid position argument given\0";
+//         std::cout << "Invalid position argument given\0";
 //         if (pos >= *length)
-//             cout << "Position of: " << pos << " too high";
+//             std::cout << "Position of: " << pos << " too high";
 //         else if (pos < 0)
-//             cout << "Position of: " << pos << " too low";
+//             std::cout << "Position of: " << pos << " too low";
 //         return;
 //     }
 

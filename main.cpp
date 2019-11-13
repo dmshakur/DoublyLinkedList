@@ -9,10 +9,11 @@ int main()
 
     // Doubly_Linked_List new_list {14};
     
-    Doubly_Linked_List list_arr {array};
+    Doubly_Linked_List list_arr (array, 4);
+
+    list_arr.display();
 
     // cout << "Class created" << endl;
-
     // cout << new_list << endl;
 
     return 0;

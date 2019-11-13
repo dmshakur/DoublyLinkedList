@@ -1,0 +1,36 @@
+[main.cpp 2019-11-13 15:12:04.398]
+,,In file included from Doubly_Linked_List.h:3,
+                 from Doubly_Linked_List.cpp:2,
+                 from main.cpp:2:
+Node.h:6:37: error: declaration of 'operator<<' as non-function
+     friend std::ostream &operator<<(ostream &os, Node &nd)
+                                     ^~~~~~~
+Node.h:6:34: error: expected ';' at end of member declaration
+     friend std::ostream &operator<<(ostream &os, Node &nd)
+                                  ^~
+                                    ;
+Node.h:6:44: error: expected ')' before '&' token
+     friend std::ostream &operator<<(ostream &os, Node &nd)
+                                    ~       ^~
+                                            )
+In file included from main.cpp:2:
+Doubly_Linked_List.cpp: In member function 'void Doubly_Linked_List::display()':
+Doubly_Linked_List.cpp:47:5: error: 'cout' was not declared in this scope
+     cout << "[- " << endl;
+     ^~~~
+Doubly_Linked_List.cpp:47:5: note: suggested alternative:
+In file included from main.cpp:1:
+c:\mingw\lib\gcc\mingw32\8.2.0\include\c++\iostream:61:18: note:   'std::cout'
+   extern ostream cout;  /// Linked to standard output
+                  ^~~~
+In file included from main.cpp:2:
+Doubly_Linked_List.cpp:47:22: error: 'endl' was not declared in this scope
+     cout << "[- " << endl;
+                      ^~~~
+Doubly_Linked_List.cpp:47:22: note: suggested alternative:
+In file included from c:\mingw\lib\gcc\mingw32\8.2.0\include\c++\iostream:39,
+                 from main.cpp:1:
+c:\mingw\lib\gcc\mingw32\8.2.0\include\c++\ostream:590:5: note:   'std::endl'
+     endl(basic_ostream<_CharT, _Traits>& __os)
+     ^~~~
+

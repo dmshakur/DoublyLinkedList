@@ -57,7 +57,7 @@ int main()
     cout << geeks << endl;;
     cout << &geeks;
 
-    (geeks_ptr + 1).set_name();
+    // (geeks_ptr + 1).set_name();
 
     cout << *(geeks + 1);
 
