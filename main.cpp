@@ -13,6 +13,10 @@ int main()
 
     list_arr.display();
 
+    list_arr.insert_data(2, 44);
+
+    list_arr.display();
+
     // cout << "Class created" << endl;
     // cout << new_list << endl;
 
