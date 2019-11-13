@@ -10,12 +10,13 @@ private:
     unsigned int length {0};
 public:
     Doubly_Linked_List();
-    Doubly_Linked_List(int data_init);
-    ~Doubly_Linked_List();
-    unsigned int get_length(){ return length; }
-    void display();
-    void insert_data(int pos, int data);
-    void remove_data(int pos);
+    Doubly_Linked_List(int data);
+    Doubly_Linked_List(int data []);
+    // ~Doubly_Linked_List();
+    unsigned int get_length() { return length; }
+    // void display();
+    // void insert_data(int pos, int data);
+    // void remove_data(int pos);
 };
 
 #endif

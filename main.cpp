@@ -3,13 +3,15 @@
 
 using namespace std;
 
-int main() {
+int main()
+{
+    int array [] = {1, 2, 3, 4};
 
-    // int array [4] = {1, 2, 3, 4];
+    // Doubly_Linked_List new_list {14};
+    
+    Doubly_Linked_List list_arr {array};
 
-    Doubly_Linked_List new_list {14};
-
-    cout << "Class created" << endl;
+    // cout << "Class created" << endl;
 
     // cout << new_list << endl;
 
