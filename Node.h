@@ -1,11 +1,12 @@
 #ifndef _NODE_H_
 #define _NODE_H_
 
+// template <class T>
 class Node
 {
     friend std::ostream &operator<<(std::ostream &os, Node &nd)
     {
-        os << nd.data;
+        os << "prev: " << nd.prev << ", data: " << nd.data << ", next: " << nd.next;
         return os;
     }
 private:
@@ -13,7 +14,7 @@ private:
     const Node *next {nullptr};
     int data;
 public:
-    Node() { data = 0; }
+    Node() { std::cout << "Initializing Node now..." << std::endl; data = 0; }
     Node(int data_init) { data = data_init; }
     Node(int data_init, Node *prev_init)
     {

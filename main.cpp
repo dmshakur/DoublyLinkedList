@@ -1,24 +1,25 @@
 #include <iostream>
 #include "Doubly_Linked_List.cpp"
 
-using namespace std;
 
 int main()
 {
+    std::cout << std::endl;
+
     int array [] = {1, 2, 3, 4};
-
-    // Doubly_Linked_List new_list {14};
+    int num {5};
     
-    Doubly_Linked_List list_arr (array, 4);
+    Doubly_Linked_List list_arr (num);
+
+    Doubly_Linked_List new_list (array, 4);
 
     list_arr.display();
 
-    list_arr.insert_data(2, 44);
+    list_arr.insert_data(0, 0);
 
     list_arr.display();
 
-    // cout << "Class created" << endl;
-    // cout << new_list << endl;
+    new_list.display();
 
     return 0;
 }

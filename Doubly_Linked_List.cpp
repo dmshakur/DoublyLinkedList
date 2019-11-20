@@ -1,27 +1,27 @@
 #include <iostream>
 #include "Doubly_Linked_List.h"
 
-// using namespace std;
-
 // std::ostream& operator<<(std::ostream& os, const Doubly_Linked_List& dll)
 // {
 //     for (int i = 0; i < dll.length; i++)
-//         os << dll.*linked_list_data[i];
+//         os << dll.*linked_list_data[i] << " ";
 //     return os;
 // }
 
 Doubly_Linked_List::Doubly_Linked_List() 
-    : length{1}
+    : length{1} 
 {
-    Node temp [] = {{}};
+    Node temp [1] = {{0}};
     linked_list_data = temp;
 }
 
 Doubly_Linked_List::Doubly_Linked_List(int data)
     : length{1}
 {
-        Node temp [] = {{data}};
-        linked_list_data = temp;
+    Node temp_node {data};
+    Node node_arr [1] {temp_node};
+    // delete temp_node;
+    linked_list_data = node_arr;
 }
 
 Doubly_Linked_List::Doubly_Linked_List(int data [], int sz)
@@ -31,6 +31,7 @@ Doubly_Linked_List::Doubly_Linked_List(int data [], int sz)
     for (int i = 0; i < sz; ++i)
     {
         temp[i].change_data(data[i]);
+        std::cout << data[i] << std::endl;
 
         if (i > 0)
             temp[i].change_prev(&temp[i - 1]);
@@ -44,10 +45,12 @@ Doubly_Linked_List::Doubly_Linked_List(int data [], int sz)
 
 void Doubly_Linked_List::display()
 {
-    std::cout << "Doubly Linked List Length Of: " << length << std::endl << "[- \0" << std::endl;
+    std::cout << "\nDoubly Linked List Length Of: " << length << std::endl << "[\n";
+
     for (int i = 0; i < length; i++)
-        std::cout << " [" << *(linked_list_data + i) << "],\0" << std::endl;
-    std::cout << " -]\0" << std::endl;
+        std::cout << " [" << (linked_list_data + i) << " -> " << *(linked_list_data + i) << "],\n";
+
+    std::cout << "]\n\n";
 }
 
 void Doubly_Linked_List::insert_data(int pos, int data)
@@ -62,13 +65,16 @@ void Doubly_Linked_List::insert_data(int pos, int data)
         return;
     }
 
-    Node temp [length + 1];
+    Node temp [length + 1] {{}};
 
     for (int i = 0; i < length + 1; i++)
     {
+        // std::cout << *(linked_list_data + i) << std::endl;
         if (i == pos)
         {
-            temp[i] = Node(data);
+            std::cout << std::endl << temp[i] << std::endl;
+            temp[i].change_data(data);
+            std::cout << std::endl << temp[i] << std::endl;
             
             if (pos > 0)
             {
@@ -83,10 +89,18 @@ void Doubly_Linked_List::insert_data(int pos, int data)
             }
         }
         else if (i > pos)
+        {
+            // std::cout << std::endl << temp[i] << std::endl;
             temp[i + 1] = *(linked_list_data + i);
+            // std::cout << std::endl << temp[i] << std::endl;
+        }
         else if (i < pos)
             temp[i] = *(linked_list_data + i);
-    }
+    } // END FOR LOOP
+
+    // for (int i = 0; i < length + 1; i++) {
+    //     std::cout << std::endl << temp[i] << std::endl;
+    // }
 
     length++;
     linked_list_data = temp;
@@ -118,4 +132,9 @@ void Doubly_Linked_List::insert_data(int pos, int data)
 //     length--;
 //     linked_list_data = temp;
 //     delete temp;
+// }
+
+// void Doubly_Linked_List::navigate()
+// {
+
 // }

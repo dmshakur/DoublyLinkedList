@@ -2,11 +2,12 @@
 #define _DOUBLY_LINKED_LIST_H_
 #include "Node.h"
 
+// template <class T>
 class Doubly_Linked_List
 {
     // friend std::ostream& operator<<(std::ostream& os, const Doubly_Linked_List& dll);
 private:
-    Node *linked_list_data;
+    Node *linked_list_data {nullptr};
     int length {0};
 public:
     Doubly_Linked_List();
@@ -16,6 +17,7 @@ public:
     void display();
     void insert_data(int pos, int data);
     // void remove_data(int pos);
+    // void navigate();
 };
 
 #endif
